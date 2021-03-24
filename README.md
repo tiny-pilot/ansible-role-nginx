@@ -1,5 +1,8 @@
 # Ansible Role: Nginx
 
+[![CircleCI](https://circleci.com/gh/tiny-pilot/ansible-role-nginx.svg?style=svg)](https://circleci.com/gh/tiny-pilot/ansible-role-nginx)
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
+
 Installs Nginx on RedHat/CentOS, Debian/Ubuntu, Archlinux, FreeBSD or OpenBSD servers.
 
 This role installs and configures the latest version of Nginx from the Nginx yum repository (on RedHat-based systems), apt (on Debian-based systems), pacman (Archlinux), pkgng (on FreeBSD systems) or pkg_add (on OpenBSD systems). You will likely need to do extra setup work after this role has installed Nginx, like adding your own [virtualhost].conf file inside `/etc/nginx/conf.d/`, describing the location and options to use for your particular website.
