@@ -15,5 +15,7 @@
       when: ansible_os_family == 'Debian'
       changed_when: false
 
-  roles:
-    - role: geerlingguy.nginx
+  tasks:
+    - name: Include ansible-role-nginx
+      include_role:
+        name: ansible-role-nginx

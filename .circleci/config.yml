@@ -1,0 +1,42 @@
+version: 2.1
+jobs:
+  check_whitespace:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: Check for trailing whitespace
+          command: tests/check-trailing-whitespace
+      - run:
+          name: Check that all text files end in a trailing newline
+          command: tests/check-trailing-newline
+  build:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+      - run:
+          name: Create symlink to role
+          command: |
+            mkdir -p "${HOME}/.ansible/roles" && \
+            ln -s "${HOME}/project" "${HOME}/.ansible/roles/ansible-role-nginx"
+      - run:
+          name: Create Python3 virtual environment
+          command: python3 -m venv venv
+      - run:
+          name: Test role with molecule
+          command: |
+            . venv/bin/activate && \
+            pip install --upgrade pip && \
+            pip install wheel==0.34.2 && \
+            pip install -r molecule/requirements.txt && \
+            ansible --version && \
+            molecule --version && \
+            molecule test
+workflows:
+  version: 2
+  all-tests:
+    jobs:
+      - check_whitespace
+      - build
