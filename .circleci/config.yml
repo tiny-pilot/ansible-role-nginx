@@ -40,5 +40,4 @@ workflows:
   all-tests:
     jobs:
       - check_whitespace
-      - check_bash
       - build
