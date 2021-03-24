@@ -188,10 +188,10 @@ Set the `nginx_conf_template` to point to a template file in your playbook direc
 nginx_conf_template: "{{ playbook_dir }}/templates/nginx.conf.j2"
 ```
 
-Create the child template in the path you configured above and extend `geerlingguy.nginx` template file relative to your `playbook.yml`.
+Create the child template in the path you configured above and extend `tiny-pilot.nginx` template file relative to your `playbook.yml`.
 
 ```
-{% extends 'roles/geerlingguy.nginx/templates/nginx.conf.j2' %}
+{% extends 'roles/tiny-pilot.nginx/templates/nginx.conf.j2' %}
 
 {% block http_gzip %}
     gzip on;
@@ -229,7 +229,7 @@ None.
 
     - hosts: server
       roles:
-        - { role: geerlingguy.nginx }
+        - role: tiny-pilot.nginx
 
 ## License
 
