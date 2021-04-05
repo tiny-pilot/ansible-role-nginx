@@ -19,6 +19,8 @@ Available variables are listed below, along with default values (see `defaults/m
 
 A list of vhost definitions (server blocks) for Nginx virtual hosts. Each entry will create a separate config file named by `server_name`. If left empty, you will need to supply your own virtual host configuration. See the commented example in `defaults/main.yml` for available server options. If you have a large number of customizations required for your server definition(s), you're likely better off managing the vhost configuration file yourself, leaving this variable set to `[]`.
 
+**Note:** This will also set up nginx to listen on the IPv6 address as well.
+
     nginx_vhosts:
       - listen: "443 ssl http2"
         server_name: "example.com"
