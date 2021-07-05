@@ -1,8 +1,15 @@
 {% block server_redirect %}
 {% if item.server_name_redirect is defined %}
 server {
-    listen       {{ item.listen | default('80') }};
-    listen       [::]:{{item.listen | default('80') }};
+    {% if item.listen is not string and item.listen is iterable %}
+        {% for listen in item.listen -%}
+            listen {{ listen }};
+            listen [::]:{{ listen }};
+        {% endfor %}
+    {% else %}
+        listen       {{ item.listen | default('80') }};
+        listen       [::]:{{item.listen | default('80') }};
+    {% endif %}
     server_name  {{ item.server_name_redirect }};
     return       301 $scheme://{{ item.server_name.split(' ')[0] }}$request_uri;
 }
@@ -13,8 +20,15 @@ server {
     {% block server_begin %}{% endblock %}
 
     {% block server_basic -%}
-    listen {{ item.listen | default('80') }};
-    listen [::]:{{item.listen | default('80') }};
+    {% if item.listen is not string and item.listen is iterable %}
+        {% for listen in item.listen -%}
+            listen {{ listen }};
+            listen [::]:{{ listen }};
+        {% endfor %}
+    {% else %}
+        listen       {{ item.listen | default('80') }};
+        listen       [::]:{{item.listen | default('80') }};
+    {% endif %}
 
 {% if item.server_name is defined %}
     server_name {{ item.server_name }};

@@ -55,6 +55,13 @@ Please take note of the indentation in the above block. The first line should be
         return: "301 https://example.com$request_uri"
         filename: "example.com.80.conf"
 
+`listen` can also be an array of strings, which will result in multiple `listen` directives for that block.
+
+      - listen: ["80", "8080"]
+        server_name: "example.com www.example.com"
+        return: "301 https://example.com$request_uri"
+        filename: "example.com.80.conf"
+
 An example of a secondary vhost which will redirect to the one shown above.
 
 *Note: The `filename` defaults to the first domain in `server_name`, if you have two vhosts with the same domain, eg. a redirect, you need to manually set the `filename` so the second one doesn't override the first one*
