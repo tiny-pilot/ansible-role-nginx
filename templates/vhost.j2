@@ -1,7 +1,9 @@
 {% block server_redirect %}
 {% if item.server_name_redirect is defined %}
 server {
-    {% if item.listen is not string and item.listen is iterable %}
+    {% if item.listen is defined and
+        item.listen is not string and
+        item.listen is iterable %}
         {% for listen in item.listen -%}
             listen {{ listen }};
             listen [::]:{{ listen }};
@@ -20,7 +22,9 @@ server {
     {% block server_begin %}{% endblock %}
 
     {% block server_basic -%}
-    {% if item.listen is not string and item.listen is iterable %}
+    {% if item.listen is defined and
+        item.listen is not string and
+        item.listen is iterable %}
         {% for listen in item.listen -%}
             listen {{ listen }};
             listen [::]:{{ listen }};
