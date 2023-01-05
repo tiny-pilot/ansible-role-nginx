@@ -9,7 +9,7 @@ This role installs and configures the latest version of Nginx from the Nginx yum
 
 ## Requirements
 
-None.
+None
 
 ## Role Variables
 
